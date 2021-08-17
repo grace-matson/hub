@@ -14,7 +14,7 @@
       "arguments": [
         {
           "name": "name",
-          "value": "anaplan-plugin",
+          "value": "anaplan-plugins",
           "canModify": false
         },
         {
