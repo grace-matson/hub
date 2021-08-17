@@ -1,7 +1,7 @@
 {
   "specVersion": "1.0",
   "label": "Anaplan plugins",
-  "description": "Anaplan plugins to read, write and run processes/actions.",
+  "description": "Anaplan plugins to read, write and run processes and actions.",
   "author": "PlanningWorks eng",
   "org": "Google, Inc.",
   "created": 1589218398,
@@ -29,12 +29,12 @@
         },
         {
           "name": "config",
-          "value": "anaplan.plugins-0.1.1.json",
+          "value": "anaplan-plugins-0.1.1.json",
           "canModify": false
         },
         {
           "name": "jar",
-          "value": "anaplan.plugins-0.1.1.jar",
+          "value": "anaplan-plugins-0.1.1.jar",
           "canModify": false
         }
       ]
