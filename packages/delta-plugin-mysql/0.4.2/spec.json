@@ -4,7 +4,7 @@
   "label": "MySQL Replication Plugin",
   "author": "Cask",
   "org": "Cask Data, Inc.",
-  "cdapVersion": "[6.4.0,6.4.0]",
+  "cdapVersion": "[6.5.0,6.5.1]",
   "created": 1636132131,
   "categories": [
     "hydrator-plugin"
