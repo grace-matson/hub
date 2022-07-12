@@ -1,0 +1,28 @@
+name: unit_test
+
+on:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout PR
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Check payload
+      run : echo "${{ toJson(github.event) }}"
+
+    - name: Get list of changed files
+      uses: ruslandulina/compare-basehead-commits@v1
+      if: always()
+      id: list
+      with:
+        format: 'json'
+    - name: Log list
+      if: always()
+      env:
+        LIST: ${{ steps.list.outputs.all }}
+      run: python3 ./.github/scripts/list.py
+
