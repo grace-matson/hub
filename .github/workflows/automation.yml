@@ -1,0 +1,34 @@
+name: hub-release-automation
+
+on:
+  workflow_dispatch    # Manual trigger event to execute workflow
+
+jobs:
+
+  setup-and-build:    # Job to build packages.json, categories.json, and artifact JAR JSON files
+    runs-on: new-runner    # Self hosted runner on GKE cluster
+    steps:
+      - name: Repository Checkout    # Action to access file structure of repository in runner
+        uses: actions/checkout@v2.3.4
+
+      - name: Version Checks    # Step to check versions of Maven and Java
+        run: |
+          mvn -version
+          java -version
+          javac -version
+      - name: Packager Build    # Step to build the packager with Maven
+        run: |
+          cd packager/
+          mvn clean package
+          cd ../
+      - name: JAR, JSON Builds    # Step to build artifact JAR JSON files using spec.json, and packages.json at root level
+        run: |
+          java -cp "packager/target/lib/*:packager/target/*" io.cdap.hub.Tool build
+      - name: Files List    # Step to list all files, and confirm successful build
+        run: ls
+        
+      - name: Copy to GCS buckets
+        run: |
+          gsutil -m cp -r -n packages/ gs://demo-automate-hub-release/
+          gsutil cp categories.json gs://demo-automate-hub-release/categories.json
+          gsutil cp packages.json gs://demo-automate-hub-release/packages.json
